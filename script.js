@@ -9,15 +9,15 @@ const collections = {
         small: "ULTRA RARE COLLECTION",
 
         items: [
-            ["Arctic Blue Bundle", "images/arctic-blue.jpg", "ULTRA RARE", "₹150"],
-            ["Zombie Samurai", "images/zombie-samurai.jpg", "RARE", "₹150"],
-            ["Knight Clown", "images/knight-clown.jpg", "ULTRA RARE", "₹150"],
-            ["Angelic Bundle", "images/angelic.jpg", "HIGH DEMAND", "₹150"],
-            ["Bunny Warrior", "images/bunny-warrior.jpg", "RARE", "₹150"],
-            ["Galaxy Dino", "images/galaxy-dino.jpg", "ULTRA RARE", "₹150"],
-            ["HipHop Bundle", "images/hiphop.jpg", "OG", "₹200"],
-            ["Old Bundle", "images/old-b.png", "RARE", "₹150"],
-            ["Sakura Bundle", "images/sakura.jpg", "HIGH DEMAND", "₹200"]
+            ["Arctic Blue Bundle", "arctic-blue.jpg", "ULTRA RARE", "₹150"],
+            ["Zombie Samurai", "zombie-samurai.jpg", "RARE", "₹150"],
+            ["Knight Clown", "knight-clown.jpg", "ULTRA RARE", "₹150"],
+            ["Angelic Bundle", "angelic.jpg", "HIGH DEMAND", "₹150"],
+            ["Bunny Warrior", "bunny-warrior.jpg", "RARE", "₹150"],
+            ["Galaxy Dino", "galaxy-dino.jpg", "ULTRA RARE", "₹150"],
+            ["HipHop Bundle", "hiphop.jpg", "OG", "₹200"],
+            ["Old Bundle", "old-b.png", "RARE", "₹150"],
+            ["Sakura Bundle", "sakura.jpg", "HIGH DEMAND", "₹200"]
         ]
     },
 
@@ -29,12 +29,12 @@ const collections = {
         small: "CRIMINAL COLLECTION",
 
         items: [
-            ["Red Criminal", "images/criminal-r.jpg", "ULTRA RARE", "₹200"],
-            ["Blue Criminal", "images/criminal-b.jpg", "ULTRA RARE", "₹150"],
-            ["Green Criminal", "images/criminal-g.jpg", "ULTRA RARE", "₹150"],
-            ["Purple Criminal", "images/criminal-p.jpg", "ULTRA RARE", "₹200"],
-            ["Yellow Criminal", "images/criminal-y.jpg", "ULTRA RARE", "₹150"],
-            ["Black Criminal", "images/criminal-l.jpg", "OG", "₹200"]
+            ["Red Criminal", "criminal-r.jpg", "ULTRA RARE", "₹200"],
+            ["Blue Criminal", "criminal-b.jpg", "ULTRA RARE", "₹150"],
+            ["Green Criminal", "criminal-g.jpg", "ULTRA RARE", "₹150"],
+            ["Purple Criminal", "criminal-p.jpg", "ULTRA RARE", "₹200"],
+            ["Yellow Criminal", "criminal-y.jpg", "ULTRA RARE", "₹150"],
+            ["Black Criminal", "criminal-l.jpg", "OG", "₹200"]
         ]
     },
 
@@ -46,11 +46,11 @@ const collections = {
         small: "DINO COLLECTION",
 
         items: [
-            ["Galaxy Dino", "images/galaxy-dino.jpg", "ULTRA RARE", "₹100"],
-            ["Green Dino", "images/dino-green.jpg", "RARE", "₹150"],
-            ["Blue Dino", "images/dino-blue.jpg", "RARE", "₹100"],
-            ["Pink Dino", "images/dino-pink.jpg", "RARE", "₹100"],
-            ["Yellow Dino", "images/dino-yellow.jpg", "RARE", "₹200"]
+            ["Galaxy Dino", "galaxy-dino.jpg", "ULTRA RARE", "₹100"],
+            ["Green Dino", "dino-green.jpg", "RARE", "₹150"],
+            ["Blue Dino", "dino-blue.jpg", "RARE", "₹100"],
+            ["Pink Dino", "dino-pink.jpg", "RARE", "₹100"],
+            ["Yellow Dino", "dino-yellow.jpg", "RARE", "₹200"]
         ]
     },
 
@@ -63,46 +63,46 @@ const collections = {
 
         items: [
 
-            ["AK47 EVO Gun", "images/ak-evo.png", "EVO", "₹200"],
-            ["M1014 EVO Gun", "images/m1014.png", "EVO", "₹150"],
-            ["XM8 EVO Gun", "images/xm8-e.png", "EVO", "₹150"],
-            ["MP40 EVO Gun", "images/mp40-e.png", "EVO", "₹150"],
-            ["GROZA EVO Gun", "images/groza-e.png", "EVO", "₹100"],
-            ["M4A1 EVO Gun", "images/m4a1-e.png", "EVO", "₹100"],
-            ["P90 EVO Gun", "images/p90-e.png", "EVO", "₹150"],
-            ["UMP EVO Gun", "images/ump-e.png", "EVO", "₹100"],
+            ["AK47 EVO Gun", "ak-evo.png", "EVO", "₹200"],
+            ["M1014 EVO Gun", "m1014.png", "EVO", "₹150"],
+            ["XM8 EVO Gun", "xm8-e.png", "EVO", "₹150"],
+            ["MP40 EVO Gun", "mp40-e.png", "EVO", "₹150"],
+            ["GROZA EVO Gun", "groza-e.png", "EVO", "₹100"],
+            ["M4A1 EVO Gun", "m4a1-e.png", "EVO", "₹100"],
+            ["P90 EVO Gun", "p90-e.png", "EVO", "₹150"],
+            ["UMP EVO Gun", "ump-e.png", "EVO", "₹100"],
 
-            ["AK47 Rare Skin", "images/ak47p.png", "LEGENDARY", "₹70"],
-            ["M4A1 Rare Skin", "images/m4a1.png", "LEGENDARY", "₹70"],
-            ["SCAR Old Fashion", "images/scar.png", "EPIC", "₹69"],
-            ["XM8 Livey Beast", "images/xm8.png", "EPIC", "₹70"],
-            ["AN94 BOOYAH", "images/an94.png", "RARE", "₹70"],
-            ["Groza Heartseeker", "images/groza.png", "LEGENDARY", "₹80"],
+            ["AK47 Rare Skin", "ak47p.png", "LEGENDARY", "₹70"],
+            ["M4A1 Rare Skin", "m4a1.png", "LEGENDARY", "₹70"],
+            ["SCAR Old Fashion", "scar.png", "EPIC", "₹69"],
+            ["XM8 Livey Beast", "xm8.png", "EPIC", "₹70"],
+            ["AN94 BOOYAH", "an94.png", "RARE", "₹70"],
+            ["Groza Heartseeker", "groza.png", "LEGENDARY", "₹80"],
 
-            ["PARAFAL Sickly Sweet", "images/parafal.png", "RARE", "₹80"],
-            ["MP40 Red Poker", "images/mp40.png", "LEGENDARY", "₹100"],
-            ["MP5 Old Fashion", "images/mp5.png", "EPIC", "₹80"],
-            ["UMP Lively Beast", "images/ump.png", "EPIC", "₹70"],
-            ["P90 Old Fashin", "images/p90.png", "RARE", "₹80"],
-            ["Thompson Lucky Koi", "images/thompson.png", "RARE", "₹70"],
+            ["PARAFAL Sickly Sweet", "parafal.png", "RARE", "₹80"],
+            ["MP40 Red Poker", "mp40.png", "LEGENDARY", "₹100"],
+            ["MP5 Old Fashion", "mp5.png", "EPIC", "₹80"],
+            ["UMP Lively Beast", "ump.png", "EPIC", "₹70"],
+            ["P90 Old Fashin", "p90.png", "RARE", "₹80"],
+            ["Thompson Lucky Koi", "thompson.png", "RARE", "₹70"],
 
-            ["M1014 Underground Howl", "images/m1014-n.png", "LEGENDARY", "₹100"],
-            ["M1887", "images/m1887.png", "LEGENDARY", "₹100"],
-            ["MAG-7", "images/mag7.png", "EPIC", "₹69"],
-            ["SPAS12", "images/spas12.png", "RARE", "₹69"],
+            ["M1014 Underground Howl", "m1014-n.png", "LEGENDARY", "₹100"],
+            ["M1887", "m1887.png", "LEGENDARY", "₹100"],
+            ["MAG-7", "mag7.png", "EPIC", "₹69"],
+            ["SPAS12", "spas12.png", "RARE", "₹69"],
 
-            ["AWM Old Fashion", "images/awm.png", "LEGENDARY", "₹100"],
-            ["Kar98k Great Plunder", "images/kar98.png", "EPIC", "₹90"],
-            ["M82B Dragon Mob", "images/m82b.png", "RARE", "₹80"],
-            ["SVD Swordsman Legends", "images/svd.png", "EPIC", "₹90"],
+            ["AWM Old Fashion", "awm.png", "LEGENDARY", "₹100"],
+            ["Kar98k Great Plunder", "kar98.png", "EPIC", "₹90"],
+            ["M82B Dragon Mob", "m82b.png", "RARE", "₹80"],
+            ["SVD Swordsman Legends", "svd.png", "EPIC", "₹90"],
 
-            ["M249 Fire Bones", "images/m249.png", "EPIC", "₹99"],
-            ["AC80", "images/ac80.png", "EPIC", "₹80"],
-            ["M60 Lively Beast", "images/m60.png", "RARE", "₹70"],
+            ["M249 Fire Bones", "m249.png", "EPIC", "₹99"],
+            ["AC80", "ac80.png", "EPIC", "₹80"],
+            ["M60 Lively Beast", "m60.png", "RARE", "₹70"],
 
-            ["Desert Eagle Ornamenal Touch", "images/desert.png", "EPIC", "₹60"],
-            ["G18 Persia Prowess", "images/g18.png", "RARE", "₹70"],
-            ["USP Rare Skin", "images/usp.png", "RARE", "₹70"]
+            ["Desert Eagle Ornamenal Touch", "desert.png", "EPIC", "₹60"],
+            ["G18 Persia Prowess", "g18.png", "RARE", "₹70"],
+            ["USP Rare Skin", "usp.png", "RARE", "₹70"]
         ]
     },
 
@@ -114,20 +114,20 @@ const collections = {
         small: "OG EMOTE COLLECTION",
 
         items: [
-            ["LOL EMOTE", "images/LOL-1.png", "OG", "₹200"],
-            ["DEVIL MOVE", "images/DEVIL-M.jpg", "RARE", "₹200"],
-            ["ROSE EMOTE", "images/ROSE-E.jpg", "EPIC", "₹100"],
-            ["PIRATE FLAG", "images/PIRATE-S.jpg", "OG", "₹100"],
-            ["I HEART YOU", "images/HEART-YOU.jpg", "OG", "₹90"],
-            ["FFWC EMOTE", "images/FF-WC.jpg", "RARE", "₹100"],
-            ["CAR EMOTE", "images/motor-sport.png", "EPIC", "₹100"],
-            ["PUSH-UP EMOTE", "images/PUSH-UP.png", "OG", "₹80"],
-            ["HIGH FIVE", "images/high-five.png", "OG", "₹70"],
-            ["MONEY GUN", "images/money-m.png", "RARE", "₹100"],
-            ["SELFIE", "images/SELFIE-CL.png", "EPIC", "₹80"],
-            ["PUSHPA RAAJ", "images/pushpa-raaj.png", "RARE", "₹100"],
-            ["MUMMY DANCE", "images/MUMMY-D.png", "OG", "₹90"],
-            ["CHAIR EMOTE", "images/sitting-chair.png", "OG", "₹100"]
+            ["LOL EMOTE", "LOL-1.png", "OG", "₹200"],
+            ["DEVIL MOVE", "DEVIL-M.jpg", "RARE", "₹200"],
+            ["ROSE EMOTE", "ROSE-E.jpg", "EPIC", "₹100"],
+            ["PIRATE FLAG", "PIRATE-S.jpg", "OG", "₹100"],
+            ["I HEART YOU", "HEART-YOU.jpg", "OG", "₹90"],
+            ["FFWC EMOTE", "FF-WC.jpg", "RARE", "₹100"],
+            ["CAR EMOTE", "motor-sport.png", "EPIC", "₹100"],
+            ["PUSH-UP EMOTE", "PUSH-UP.png", "OG", "₹80"],
+            ["HIGH FIVE", "high-five.png", "OG", "₹70"],
+            ["MONEY GUN", "money-m.png", "RARE", "₹100"],
+            ["SELFIE", "SELFIE-CL.png", "EPIC", "₹80"],
+            ["PUSHPA RAAJ", "pushpa-raaj.png", "RARE", "₹100"],
+            ["MUMMY DANCE", "MUMMY-D.png", "OG", "₹90"],
+            ["CHAIR EMOTE", "sitting-chair.png", "OG", "₹100"]
         ]
     },
 
@@ -139,14 +139,14 @@ const collections = {
         small: "ENTRY EMOTE COLLECTION",
 
         items: [
-            ["LAMBOHGINI RIDER", "images/lamborghini-reder.png", "OG", "₹150"],
-            ["TORNADO", "images/tornado.png", "OG", "₹150"],
-            ["OVER-CHARGE", "images/over-charge.png", "RARE", "₹150"],
-            ["DRAGON RIDE", "images/dragon-ride.png", "EPIC", "₹150"],
-            ["HORSE RIDE", "images/horse-ride.png", "OG", "₹150"],
-            ["WOLF ZAP", "images/wolf-zap.png", "RARE", "₹150"],
-            ["CARPET", "images/carpet-entry.png", "EPIC", "₹200"],
-            ["ENTRY EMOTE", "images/entry-bike.png", "OG", "₹150"]
+            ["LAMBOHGINI RIDER", "lamborghini-reder.png", "OG", "₹150"],
+            ["TORNADO", "tornado.png", "OG", "₹150"],
+            ["OVER-CHARGE", "over-charge.png", "RARE", "₹150"],
+            ["DRAGON RIDE", "dragon-ride.png", "EPIC", "₹150"],
+            ["HORSE RIDE", "horse-ride.png", "OG", "₹150"],
+            ["WOLF ZAP", "wolf-zap.png", "RARE", "₹150"],
+            ["CARPET", "carpet-entry.png", "EPIC", "₹200"],
+            ["ENTRY EMOTE", "entry-bike.png", "OG", "₹150"]
         ]
     },
 
@@ -158,14 +158,14 @@ const collections = {
         small: "SPECIAL WALL COLLECTION",
 
         items: [
-            ["AZURE Dragon Gloo Wall", "images/azure-gloo.png", "LEGENDARY", "₹90"],
-            ["Cobra Gloo Wall", "images/cobra.png", "EPIC", "₹80"],
-            ["ROARING PROTECTOR", "images/roar-ing.png", "RARE", "₹70"],
-            ["Demon SLAYER", "images/demon-slayer.png", "EPIC", "₹70"],
-            ["MINI GLOO WALL", "images/mini-wall.png", "OG", "₹70"],
-            ["SPIRIT GLOO WALL", "images/black-wall.png", "RARE", "₹70"],
-            ["NUTTY QUIRK", "images/nutty-quirk.png", "EPIC", "₹70"],
-            ["DRAGON SHIELD", "images/dra-gon.png", "RARE", "₹70"]
+            ["AZURE Dragon Gloo Wall", "azure-gloo.png", "LEGENDARY", "₹90"],
+            ["Cobra Gloo Wall", "cobra.png", "EPIC", "₹80"],
+            ["ROARING PROTECTOR", "roar-ing.png", "RARE", "₹70"],
+            ["Demon SLAYER", "demon-slayer.png", "EPIC", "₹70"],
+            ["MINI GLOO WALL", "mini-wall.png", "OG", "₹70"],
+            ["SPIRIT GLOO WALL", "black-wall.png", "RARE", "₹70"],
+            ["NUTTY QUIRK", "nutty-quirk.png", "EPIC", "₹70"],
+            ["DRAGON SHIELD", "dra-gon.png", "RARE", "₹70"]
         ]
     },
 
@@ -177,10 +177,10 @@ const collections = {
         small: "GRENADE COLLECTION",
 
         items: [
-            ["Explosive Brick", "images/explo-sive.png", "RARE", "₹80"],
-            ["Pumpkin Bomb", "images/pump-kin.png", "EPIC", "₹69"],
-            ["Pineapple Fizz", "images/pine-apple.png", "RARE", "₹69"],
-            ["Egg Grenade", "images/e-gg.png", "EPIC", "₹69"]
+            ["Explosive Brick", "explo-sive.png", "RARE", "₹80"],
+            ["Pumpkin Bomb", "pump-kin.png", "EPIC", "₹69"],
+            ["Pineapple Fizz", "pine-apple.png", "RARE", "₹69"],
+            ["Egg Grenade", "e-gg.png", "EPIC", "₹69"]
         ]
     },
 
@@ -192,10 +192,10 @@ const collections = {
         small: "DIAMOND COLLECTION",
 
         items: [
-            ["1,000 Diamonds", "images/5-diamond.png", "EPIC", "₹60"],
-            ["5,000 Diamonds", "images/5-diamond.png", "EPIC", "₹100"],
-            ["10,000 Diamonds", "images/5-diamond.png", "EPIC", "₹400"],
-            ["20,000 Diamonds", "images/5-diamond.png", "EPIC", "₹500"]
+            ["1,000 Diamonds", "5-diamond.png", "EPIC", "₹60"],
+            ["5,000 Diamonds", "5-diamond.png", "EPIC", "₹100"],
+            ["10,000 Diamonds", "5-diamond.png", "EPIC", "₹400"],
+            ["20,000 Diamonds", "5-diamond.png", "EPIC", "₹500"]
         ]
     }
 
