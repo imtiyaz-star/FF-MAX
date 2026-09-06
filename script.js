@@ -491,49 +491,31 @@ document
    2 MINUTE TIMER
 ========================= */
 
+let countdownInterval;
+
 function startTimer() {
 
-    clearInterval(
-        countdownInterval
-    );
+    clearInterval(countdownInterval);
 
     let timeLeft = 120;
 
-    const timer =
-        document.getElementById("timer");
-
-    const submitButton =
-        document.getElementById(
-            "finalSubmitBtn"
-        );
-
-    submitButton.disabled = true;
-
     updateTimer(timeLeft);
 
-    countdownInterval =
-        setInterval(() => {
+    countdownInterval = setInterval(() => {
 
-            timeLeft--;
+        timeLeft--;
 
-            updateTimer(
-                timeLeft
-            );
+        updateTimer(timeLeft);
 
-            if (timeLeft <= 0) {
+        if (timeLeft <= 0) {
 
-                clearInterval(
-                    countdownInterval
-                );
+            clearInterval(countdownInterval);
 
-                timer.textContent =
-                    "00:00";
+            updateTimer(0);
 
-                submitButton.disabled =
-                    false;
-            }
+        }
 
-        }, 1000);
+    }, 1000);
 }
 
 
@@ -544,21 +526,20 @@ function startTimer() {
 function updateTimer(seconds) {
 
     const minutes =
-        Math.floor(
-            seconds / 60
-        );
+        Math.floor(seconds / 60);
 
     const remainingSeconds =
         seconds % 60;
 
-    document
-        .getElementById("timer")
-        .textContent =
-        String(minutes)
-            .padStart(2, "0") +
+    const timer =
+        document.getElementById("timer");
+
+    if (!timer) return;
+
+    timer.textContent =
+        String(minutes).padStart(2, "0") +
         ":" +
-        String(remainingSeconds)
-            .padStart(2, "0");
+        String(remainingSeconds).padStart(2, "0");
 }
 
 
