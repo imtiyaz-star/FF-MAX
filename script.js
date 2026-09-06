@@ -491,8 +491,6 @@ document
    2 MINUTE TIMER
 ========================= */
 
-let countdownInterval;
-
 function startTimer() {
 
     clearInterval(countdownInterval);
