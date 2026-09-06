@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FF Vault Admin</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080808;
+            color: white;
+        }
+
+        .login-box {
+            width: 320px;
+            margin: 120px auto;
+            padding: 25px;
+            background: #151515;
+            border-radius: 15px;
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #adminPanel {
+            display: none;
+            padding: 25px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .admin-header button {
+            width: auto;
+            margin-left: 8px;
+            padding: 10px 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+
+        th {
+            background: #151515;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: #4a3b00;
+            color: #ffd84d;
+        }
+
+        .status-completed {
+            background: #063d20;
+            color: #4dff9a;
+        }
+
+        .status-cancelled {
+            background: #4a1010;
+            color: #ff6b6b;
+        }
+
+        .error {
+            color: #ff5555;
+            margin-top: 10px;
+        }
+
+        .logout {
+            width: auto;
+            padding: 10px 18px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        .delete-btn {
+            width: auto;
+            margin: 0;
+            padding: 8px 12px;
+            background: #8b0000;
+            color: white;
+            border-radius: 7px;
+        }
+
+        .delete-btn:hover {
+            background: #b00000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <div id="loginBox" class="login-box">
+
+        <h2>FF Vault Admin</h2>
+
+        <input
+            id="username"
+            type="text"
+            placeholder="Admin username"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Admin password"
+        >
+
+        <button onclick="login()">
+            LOGIN
+        </button>
+
+        <div id="error" class="error"></div>
+
+    </div>
+
+
+    <!-- =========================
+         ADMIN PANEL
+    ========================== -->
+
+    <div id="adminPanel">
+
+        <div class="admin-header">
+
+            <h1>Orders</h1>
+
+            <div>
+
+                <button onclick="loadOrders()">
+                    🔄 Refresh
+                </button>
+
+                <button
+                    class="logout"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Nickname</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           LOGIN
+        ========================== */
+
+        async function login() {
+
+            const username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/admin/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                username,
+                                password
+                            })
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+
+                    document
+                        .getElementById("error")
+                        .textContent =
+                            result.message ||
+                            "Invalid login";
+
+                    return;
+                }
+
+
+                document
+                    .getElementById("loginBox")
+                    .style.display = "none";
+
+
+                document
+                    .getElementById("adminPanel")
+                    .style.display = "block";
+
+
+                loadOrders();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                document
+                    .getElementById("error")
+                    .textContent =
+                        "Server connection error";
+            }
+        }
+
+
+        /* =========================
+           LOAD ORDERS
+        ========================== */
+
+        async function loadOrders() {
+
+            try {
+
+                const response =
+                    await fetch("/api/orders");
+
+
+                if (!response.ok) {
+
+                    console.error(
+                        "Could not load orders:",
+                        response.status
+                    );
+
+                    return;
+                }
+
+
+                /*
+                 * SERVER RESPONSE:
+                 *
+                 * {
+                 *     success: true,
+                 *     orders: [...]
+                 * }
+                 */
+
+                const result =
+                    await response.json();
+
+
+                if (!result.success) {
+
+                    console.error(
+                        result.message ||
+                        "Could not load orders"
+                    );
+
+                    return;
+                }
+
+
+                const orders =
+                    Array.isArray(result.orders)
+                        ? result.orders
+                        : [];
+
+
+                const body =
+                    document
+                        .getElementById("ordersBody");
+
+
+                body.innerHTML = "";
+
+
+                orders.forEach(order => {
+
+                    const row =
+                        document.createElement("tr");
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${escapeHtml(order.id)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(order.email)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(order.nickname)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(order.selectedItem)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(order.price)}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="status-badge status-${escapeHtml(order.status)}"
+                            >
+                                ${escapeHtml(order.status)}
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ${escapeHtml(order.createdAt)}
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteOrder(${Number(order.id)})"
+                            >
+                                🗑️ DELETE
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    body.appendChild(row);
+
+                });
+
+
+                console.log(
+                    "Orders loaded:",
+                    orders.length
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Orders error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           DELETE ORDER
+        ========================== */
+
+        async function deleteOrder(id) {
+
+            const confirmed =
+                confirm(
+                    "Kya tum ye order permanently delete karna chahte ho?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/orders/${id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !result.success
+                ) {
+
+                    alert(
+                        result.message ||
+                        "Order delete nahi hua."
+                    );
+
+                    return;
+                }
+
+
+                alert(
+                    "Order successfully deleted ✅"
+                );
+
+
+                await loadOrders();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Delete error:",
+                    error
+                );
+
+                alert(
+                    "Server connection error."
+                );
+            }
+        }
+
+
+        /* =========================
+           HTML SAFETY
+        ========================== */
+
+        function escapeHtml(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
+        async function logout() {
+
+            try {
+
+                await fetch(
+                    "/api/admin/logout",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+            }
+
+            location.reload();
+        }
+
+    </script>
+
+</body>
+</html>
