@@ -507,20 +507,26 @@ function startTimer() {
 
         if (timeLeft <= 0) {
 
-    clearInterval(countdownInterval);
+            clearInterval(countdownInterval);
 
-    updateTimer(0);
+            updateTimer(0);
 
-    const submitModal =
-        document.getElementById("submitModal");
+            const submitModal =
+                document.getElementById(
+                    "submitModal"
+                );
 
-    if (submitModal) {
-        submitModal.classList.add("hidden");
-    }
+            if (submitModal) {
+                submitModal.classList.add("hidden");
+            }
 
-    goHome();
+            goHome();
 
-}
+            setTimeout(() => {
+                showOfferPopup();
+            }, 300);
+
+        }
 
     }, 1000);
 }
@@ -555,7 +561,15 @@ function updateTimer(seconds) {
 ========================= */
 
 async function finalSubmit() {
-    const btn = document.getElementById("finalSubmitBtn");
+
+    const btn =
+        document.getElementById(
+            "finalSubmitBtn"
+        );
+
+    if (!btn) {
+        return;
+    }
 
     if (btn.disabled) {
         return;
@@ -563,32 +577,50 @@ async function finalSubmit() {
 
     clearInterval(countdownInterval);
 
-    // Order ko completed mark karne ki koshish
     if (orderId) {
+
         try {
-            await fetch(`/api/orders/${orderId}/status`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    status: "completed"
-                })
-            });
+
+            await fetch(
+                `/api/orders/${orderId}/status`,
+                {
+                    method: "PATCH",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        status: "completed"
+                    })
+                }
+            );
+
         } catch (error) {
-            console.log("Status update error:", error);
+
+            console.log(
+                "Status update error:",
+                error
+            );
+
         }
+
     }
 
-    // Verification modal band
-    const submitModal = document.getElementById("submitModal");
+    const submitModal =
+        document.getElementById(
+            "submitModal"
+        );
 
     if (submitModal) {
         submitModal.classList.add("hidden");
     }
 
-    // Pehle DONE popup dikhao
-    const successModal = document.getElementById("successModal");
+    const successModal =
+        document.getElementById(
+            "successModal"
+        );
 
     if (successModal) {
         successModal.classList.remove("hidden");
@@ -596,50 +628,42 @@ async function finalSubmit() {
 }
 
 
-    /*
-       Close submit modal
-    */
-
-    document
-        .getElementById("submitModal")
-        .classList
-        .add("hidden");
-
-
-    /*
-       Go back to HOME
-    */
-
-    goHome();
-
-
-    /*
-       Show offer popup
-    */
-
-    setTimeout(() => {
-
-        showOfferPopup();
-
-    }, 300);
-
-
-
 /* =========================
    CLOSE SUBMIT MODAL
 ========================= */
 
+function closeSubmitModal() {
+
+    const submitModal =
+        document.getElementById(
+            "submitModal"
+        );
+
+    if (submitModal) {
+        submitModal.classList.add("hidden");
+    }
+
+    clearInterval(countdownInterval);
+}
+
+
+/* =========================
+   CLOSE SUCCESS
+========================= */
+
 function closeSuccess() {
-    const successModal = document.getElementById("successModal");
+
+    const successModal =
+        document.getElementById(
+            "successModal"
+        );
 
     if (successModal) {
         successModal.classList.add("hidden");
     }
 
-    // DONE ke baad Home par wapas
     goHome();
 
-    // Thoda delay, phir BUY 3 GET 4 popup
     setTimeout(() => {
         showOfferPopup();
     }, 300);
@@ -827,7 +851,7 @@ if (offerModal) {
    ESC KEY
 ========================= */
 
-document.addEventListener
+document.addEventListener(
     "keydown",
     function(event) {
 
@@ -842,3 +866,4 @@ document.addEventListener
         }
 
     }
+);
