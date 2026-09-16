@@ -507,11 +507,20 @@ function startTimer() {
 
         if (timeLeft <= 0) {
 
-            clearInterval(countdownInterval);
+    clearInterval(countdownInterval);
 
-            updateTimer(0);
+    updateTimer(0);
 
-        }
+    const submitModal =
+        document.getElementById("submitModal");
+
+    if (submitModal) {
+        submitModal.classList.add("hidden");
+    }
+
+    goHome();
+
+}
 
     }, 1000);
 }
