@@ -9,10 +9,12 @@ const PORT = process.env.PORT || 3000;
 
 const ADMIN_USER = process.env.ADMIN_USER || "admin";
 const ADMIN_PASSWORD =
-    process.env.ADMIN_PASSWORD || "change-this-password";
+    process.env.ADMIN_PASSWORD ||
+    "change-this-password";
 
 const SESSION_SECRET =
-    process.env.SESSION_SECRET || "change-this-session-secret";
+    process.env.SESSION_SECRET ||
+    "change-this-session-secret";
 
 
 /* =========================
@@ -37,6 +39,147 @@ db.exec(`
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `);
+
+
+/* =========================
+   SERVER PRICE LIST
+========================= */
+
+const PRODUCT_PRICES = {
+
+    /* RARE */
+
+    "Arctic Blue Bundle": "₹149",
+    "Zombie Samurai": "₹199",
+    "Knight Clown": "₹149",
+    "Angelic Bundle": "₹199",
+    "Bunny Warrior": "₹199",
+    "Galaxy Dino": "₹179",
+    "HipHop Bundle": "₹200",
+    "Old Bundle": "₹149",
+    "Sakura Bundle": "₹199",
+
+
+    /* CRIMINAL */
+
+    "Red Criminal": "₹199",
+    "Blue Criminal": "₹149",
+    "Green Criminal": "₹199",
+    "Purple Criminal": "₹199",
+    "Yellow Criminal": "₹199",
+    "Black Criminal": "₹249",
+
+
+    /* DINO */
+
+    "Green Dino": "₹199",
+    "Blue Dino": "₹199",
+    "Pink Dino": "₹99",
+    "Yellow Dino": "₹199",
+
+
+    /* GUNS */
+
+    "AK47 EVO Gun": "₹249",
+    "M1014 EVO Gun": "₹199",
+    "XM8 EVO Gun": "₹199",
+    "MP40 EVO Gun": "₹249",
+    "GROZA EVO Gun": "₹149",
+    "M4A1 EVO Gun": "₹149",
+    "P90 EVO Gun": "₹199",
+    "UMP EVO Gun": "₹149",
+
+    "AK47 Rare Skin": "₹149",
+    "M4A1 Rare Skin": "₹149",
+    "SCAR Old Fashion": "₹149",
+    "XM8 Livey Beast": "₹99",
+    "AN94 BOOYAH": "₹149",
+    "Groza Heartseeker": "₹149",
+
+    "PARAFAL Sickly Sweet": "₹139",
+    "MP40 Red Poker": "₹199",
+    "MP5 Old Fashion": "₹139",
+    "UMP Lively Beast": "₹149",
+    "P90 Old Fashin": "₹199",
+    "Thompson Lucky Koi": "₹149",
+
+    "M1014 Underground Howl": "₹115",
+    "M1887": "₹199",
+    "MAG-7": "₹69",
+    "SPAS12": "₹110",
+
+    "AWM Old Fashion": "₹149",
+    "Kar98k Great Plunder": "₹129",
+    "M82B Dragon Mob": "₹120",
+    "SVD Swordsman Legends": "₹99",
+
+    "M249 Fire Bones": "₹99",
+    "AC80": "₹139",
+    "M60 Lively Beast": "₹115",
+
+    "Desert Eagle Ornamenal Touch": "₹79",
+    "G18 Persia Prowess": "₹69",
+    "USP Rare Skin": "₹59",
+
+
+    /* EMOTES */
+
+    "LOL EMOTE": "₹249",
+    "DEVIL MOVE": "₹249",
+    "ROSE EMOTE": "₹149",
+    "PIRATE FLAG": "₹149",
+    "I HEART YOU": "₹110",
+    "FFWC EMOTE": "₹199",
+    "CAR EMOTE": "₹199",
+    "PUSH-UP EMOTE": "₹199",
+    "HIGH FIVE": "₹149",
+    "MONEY GUN": "₹179",
+    "SELFIE": "₹149",
+    "PUSHPA RAAJ": "₹179",
+    "MUMMY DANCE": "₹115",
+    "CHAIR EMOTE": "₹179",
+
+
+    /* ENTRY EMOTES */
+
+    "LAMBOHGINI RIDER": "₹199",
+    "TORNADO": "₹249",
+    "OVER-CHARGE": "₹199",
+    "DRAGON RIDE": "₹149",
+    "HORSE RIDE": "₹179",
+    "WOLF ZAP": "₹189",
+    "CARPET": "₹199",
+    "ENTRY EMOTE": "₹149",
+
+
+    /* GLOO */
+
+    "AZURE Dragon Gloo Wall": "₹79",
+    "Cobra Gloo Wall": "₹99",
+    "ROARING PROTECTOR": "₹99",
+    "Demon SLAYER": "₹149",
+    "MINI GLOO WALL": "₹199",
+    "SPIRIT GLOO WALL": "₹179",
+    "NUTTY QUIRK": "₹149",
+    "DRAGON SHIELD": "₹179",
+
+
+    /* GRENADE */
+
+    "Explosive Brick": "₹99",
+    "Pumpkin Bomb": "₹99",
+    "Pineapple Fizz": "₹99",
+    "Egg Grenade": "₹99",
+
+
+    /* DIAMONDS */
+
+    "1,000 Diamonds": "₹60",
+    "10,000 Diamonds": "₹149",
+    "20,000 Diamonds": "₹400",
+    "50,000 Diamonds": "₹500"
+
+};
 
 
 /* =========================
@@ -184,16 +327,14 @@ app.post("/api/orders", (req, res) => {
         const {
             email,
             nickname,
-            selectedItem,
-            price
+            selectedItem
         } = req.body;
 
 
         if (
             !email ||
             !nickname ||
-            !selectedItem ||
-            !price
+            !selectedItem
         ) {
 
             return res.status(400).json({
@@ -201,7 +342,45 @@ app.post("/api/orders", (req, res) => {
                 success: false,
 
                 message:
-                    "Email, nickname, item and price are required."
+                    "Email, nickname and item are required."
+
+            });
+
+        }
+
+
+        const cleanEmail =
+            String(email).trim();
+
+        const cleanNickname =
+            String(nickname).trim();
+
+        const cleanItem =
+            String(selectedItem).trim();
+
+
+        /*
+            IMPORTANT:
+
+            Client ki bheji hui price ko
+            ab trust nahi kiya ja raha.
+
+            Server khud product ki price
+            PRODUCT_PRICES se nikal raha hai.
+        */
+
+        const lockedPrice =
+            PRODUCT_PRICES[cleanItem];
+
+
+        if (!lockedPrice) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Invalid product."
 
             });
 
@@ -224,13 +403,13 @@ app.post("/api/orders", (req, res) => {
 
         const result = insert.run(
 
-            String(email).trim(),
+            cleanEmail,
 
-            String(nickname).trim(),
+            cleanNickname,
 
-            String(selectedItem).trim(),
+            cleanItem,
 
-            String(price).trim()
+            lockedPrice
 
         );
 
@@ -239,7 +418,11 @@ app.post("/api/orders", (req, res) => {
 
             success: true,
 
-            id: result.lastInsertRowid,
+            orderId: result.lastInsertRowid,
+
+            price: lockedPrice,
+
+            selectedItem: cleanItem,
 
             message: "Order created successfully"
 
