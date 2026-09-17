@@ -411,10 +411,7 @@ document
                                     buyerNickname,
 
                                 selectedItem:
-                                    selectedItem,
-
-                                price:
-                                    selectedPrice
+                                    selectedItem
                             })
                         }
                     );
@@ -445,6 +442,13 @@ document
 
                 orderId =
                     result.orderId;
+
+                /*
+                    SERVER-CONFIRMED PRICE
+                    Frontend ki price ko trust nahi kar rahe.
+                */
+                selectedPrice =
+                    result.price;
 
                 closeBuyForm();
 
