@@ -1,306 +1,277 @@
-let orderId = null;
+// ============================================================
+// FF VAULT - SCRIPT.JS
+// Razorpay Dynamic Payment Version
+// ============================================================
+
+// ============================================================
+// PRODUCT COLLECTIONS
+// ============================================================
 
 const collections = {
 
-    /* RARE BUNDLES */
-
     rare: {
-        title: "Rare Bundles",
-        small: "ULTRA RARE COLLECTION",
-
+        title: "RARE COLLECTION",
         items: [
-            ["Arctic Blue Bundle", "arctic-blue.jpg", "ULTRA RARE", "₹149"],
+            ["Arctic Blue Bundle", "arctic-blue.jpg", "RARE", "₹149"],
             ["Zombie Samurai", "zombie-samurai.jpg", "RARE", "₹199"],
-            ["Knight Clown", "knight-clown.jpg", "ULTRA RARE", "₹149"],
-            ["Angelic Bundle", "angelic.jpg", "HIGH DEMAND", "₹199"],
+            ["Knight Clown", "knight-clown.jpg", "RARE", "₹149"],
+            ["Angelic Bundle", "angelic.jpg", "RARE", "₹199"],
             ["Bunny Warrior", "bunny-warrior.jpg", "RARE", "₹199"],
-            ["Galaxy Dino", "galaxy-dino.jpg", "ULTRA RARE", "₹179"],
-            ["HipHop Bundle", "hiphop.jpg", "OG", "₹200"],
+            ["Galaxy Dino", "galaxy-dino.jpg", "RARE", "₹179"],
+            ["HipHop Bundle", "hiphop.jpg", "RARE", "₹200"],
             ["Old Bundle", "old-b.png", "RARE", "₹149"],
-            ["Sakura Bundle", "sakura.jpg", "HIGH DEMAND", "₹199"]
+            ["Sakura Bundle", "sakura.jpg", "RARE", "₹199"]
         ]
     },
-
-
-    /* CRIMINAL */
 
     criminal: {
-        title: "Criminal Bundles",
-        small: "CRIMINAL COLLECTION",
-
+        title: "CRIMINAL COLLECTION",
         items: [
-            ["Red Criminal", "criminal-r.jpg", "ULTRA RARE", "₹199"],
-            ["Blue Criminal", "criminal-b.jpg", "ULTRA RARE", "₹149"],
-            ["Green Criminal", "criminal-g.jpg", "ULTRA RARE", "₹199"],
-            ["Purple Criminal", "criminal-p.jpg", "ULTRA RARE", "₹199"],
-            ["Yellow Criminal", "criminal-y.jpg", "ULTRA RARE", "₹199"],
-            ["Black Criminal", "criminal-l.jpg", "OG", "₹249"]
+            ["Red Criminal", "red-criminal.jpg", "CRIMINAL", "₹199"],
+            ["Blue Criminal", "blue-criminal.jpg", "CRIMINAL", "₹149"],
+            ["Green Criminal", "green-criminal.jpg", "CRIMINAL", "₹199"],
+            ["Purple Criminal", "purple-criminal.jpg", "CRIMINAL", "₹199"],
+            ["Yellow Criminal", "yellow-criminal.jpg", "CRIMINAL", "₹199"],
+            ["Black Criminal", "black-criminal.jpg", "CRIMINAL", "₹249"]
         ]
     },
-
-
-    /* DINO */
 
     dino: {
-        title: "Dino Bundles",
-        small: "DINO COLLECTION",
-
+        title: "DINO COLLECTION",
         items: [
-            ["Galaxy Dino", "galaxy-dino.jpg", "ULTRA RARE", "₹149"],
-            ["Green Dino", "dino-green.jpg", "RARE", "₹199"],
-            ["Blue Dino", "dino-blue.jpg", "RARE", "₹199"],
-            ["Pink Dino", "dino-pink.jpg", "RARE", "₹99"],
-            ["Yellow Dino", "dino-yellow.jpg", "RARE", "₹199"]
+            ["Galaxy Dino", "galaxy-dino.jpg", "DINO", "₹149"],
+            ["Green Dino", "green-dino.jpg", "DINO", "₹199"],
+            ["Blue Dino", "blue-dino.jpg", "DINO", "₹199"],
+            ["Pink Dino", "pink-dino.jpg", "DINO", "₹99"],
+            ["Yellow Dino", "yellow-dino.jpg", "DINO", "₹199"]
         ]
     },
-
-
-    /* GUN SKINS */
 
     guns: {
-        title: "Rare Gun Skins",
-        small: "LEGENDARY & EVO COLLECTION",
-
+        title: "GUN COLLECTION",
         items: [
-
-            ["AK47 EVO Gun", "ak-evo.png", "EVO", "₹249"],
-            ["M1014 EVO Gun", "m1014.png", "EVO", "₹199"],
-            ["XM8 EVO Gun", "xm8-e.png", "EVO", "₹199"],
-            ["MP40 EVO Gun", "mp40-e.png", "EVO", "₹249"],
-            ["GROZA EVO Gun", "groza-e.png", "EVO", "₹149"],
-            ["M4A1 EVO Gun", "m4a1-e.png", "EVO", "₹149"],
-            ["P90 EVO Gun", "p90-e.png", "EVO", "₹199"],
-            ["UMP EVO Gun", "ump-e.png", "EVO", "₹149"],
-
-            ["AK47 Rare Skin", "ak47p.png", "LEGENDARY", "₹149"],
-            ["M4A1 Rare Skin", "m4a1.png", "LEGENDARY", "₹149"],
-            ["SCAR Old Fashion", "scar.png", "EPIC", "₹149"],
-            ["XM8 Livey Beast", "xm8.png", "EPIC", "₹99"],
-            ["AN94 BOOYAH", "an94.png", "RARE", "₹149"],
-            ["Groza Heartseeker", "groza.png", "LEGENDARY", "₹149"],
-
-            ["PARAFAL Sickly Sweet", "parafal.png", "RARE", "₹139"],
-            ["MP40 Red Poker", "mp40.png", "LEGENDARY", "₹199"],
-            ["MP5 Old Fashion", "mp5.png", "EPIC", "₹139"],
-            ["UMP Lively Beast", "ump.png", "EPIC", "₹149"],
-            ["P90 Old Fashin", "p90.png", "RARE", "₹199"],
-            ["Thompson Lucky Koi", "thompson.png", "RARE", "₹149"],
-
-            ["M1014 Underground Howl", "m1014-n.png", "LEGENDARY", "₹115"],
-            ["M1887", "m1887.png", "LEGENDARY", "₹199"],
-            ["MAG-7", "mag7.png", "EPIC", "₹69"],
-            ["SPAS12", "spas12.png", "RARE", "₹110"],
-
-            ["AWM Old Fashion", "awm.png", "LEGENDARY", "₹149"],
-            ["Kar98k Great Plunder", "kar98.png", "EPIC", "₹129"],
-            ["M82B Dragon Mob", "m82b.png", "RARE", "₹120"],
-            ["SVD Swordsman Legends", "svd.png", "EPIC", "₹99"],
-
-            ["M249 Fire Bones", "m249.png", "EPIC", "₹99"],
-            ["AC80", "ac80.png", "EPIC", "₹139"],
-            ["M60 Lively Beast", "m60.png", "RARE", "₹115"],
-
-            ["Desert Eagle Ornamenal Touch", "desert.png", "EPIC", "₹79"],
-            ["G18 Persia Prowess", "g18.png", "RARE", "₹69"],
-            ["USP Rare Skin", "usp.png", "RARE", "₹59"]
+            ["AK47 EVO Gun", "ak47-evo.jpg", "GUN", "₹249"],
+            ["M1014 EVO Gun", "m1014-evo.jpg", "GUN", "₹199"],
+            ["XM8 EVO Gun", "xm8-evo.jpg", "GUN", "₹199"],
+            ["MP40 EVO Gun", "mp40-evo.jpg", "GUN", "₹249"],
+            ["GROZA EVO Gun", "groza-evo.jpg", "GUN", "₹149"],
+            ["M4A1 EVO Gun", "m4a1-evo.jpg", "GUN", "₹149"],
+            ["P90 EVO Gun", "p90-evo.jpg", "GUN", "₹199"],
+            ["UMP EVO Gun", "ump-evo.jpg", "GUN", "₹149"],
+            ["AK47 Rare Skin", "ak47-rare.jpg", "GUN", "₹149"],
+            ["M4A1 Rare Skin", "m4a1-rare.jpg", "GUN", "₹149"],
+            ["SCAR Old Fashion", "scar-old.jpg", "GUN", "₹149"],
+            ["XM8 Livey Beast", "xm8-livey.jpg", "GUN", "₹99"],
+            ["AN94 BOOYAH", "an94-booyah.jpg", "GUN", "₹149"],
+            ["Groza Heartseeker", "groza-heartseeker.jpg", "GUN", "₹149"],
+            ["PARAFAL Sickly Sweet", "parafal-sickly.jpg", "GUN", "₹139"],
+            ["MP40 Red Poker", "mp40-red-poker.jpg", "GUN", "₹199"],
+            ["MP5 Old Fashion", "mp5-old.jpg", "GUN", "₹139"],
+            ["UMP Lively Beast", "ump-lively.jpg", "GUN", "₹149"],
+            ["P90 Old Fashin", "p90-old.jpg", "GUN", "₹199"],
+            ["Thompson Lucky Koi", "thompson-lucky.jpg", "GUN", "₹149"],
+            ["M1014 Underground Howl", "m1014-underground.jpg", "GUN", "₹115"],
+            ["M1887", "m1887.jpg", "GUN", "₹199"],
+            ["MAG-7", "mag-7.jpg", "GUN", "₹69"],
+            ["SPAS12", "spas12.jpg", "GUN", "₹110"],
+            ["AWM Old Fashion", "awm-old.jpg", "GUN", "₹149"],
+            ["Kar98k Great Plunder", "kar98k.jpg", "GUN", "₹129"],
+            ["M82B Dragon Mob", "m82b.jpg", "GUN", "₹120"],
+            ["SVD Swordsman Legends", "svd.jpg", "GUN", "₹99"],
+            ["M249 Fire Bones", "m249.jpg", "GUN", "₹99"],
+            ["AC80", "ac80.jpg", "GUN", "₹139"],
+            ["M60 Lively Beast", "m60.jpg", "GUN", "₹115"],
+            ["Desert Eagle Ornamenal Touch", "desert-eagle.jpg", "GUN", "₹79"],
+            ["G18 Persia Prowess", "g18.jpg", "GUN", "₹69"],
+            ["USP Rare Skin", "usp.jpg", "GUN", "₹59"]
         ]
     },
-
-
-    /* EMOTES */
 
     emotes: {
-        title: "Rare Emotes",
-        small: "OG EMOTE COLLECTION",
-
+        title: "EMOTE COLLECTION",
         items: [
-            ["LOL EMOTE", "LOL-1.png", "OG", "₹249"],
-            ["DEVIL MOVE", "DEVIL-M.jpg", "RARE", "₹249"],
-            ["ROSE EMOTE", "ROSE-E.jpg", "EPIC", "₹149"],
-            ["PIRATE FLAG", "PIRATE-S.jpg", "OG", "₹149"],
-            ["I HEART YOU", "HEART-YOU.jpg", "OG", "₹110"],
-            ["FFWC EMOTE", "FF-WC.jpg", "RARE", "₹199"],
-            ["CAR EMOTE", "motor-sport.png", "EPIC", "₹199"],
-            ["PUSH-UP EMOTE", "PUSH-UP.png", "OG", "₹199"],
-            ["HIGH FIVE", "high-five.png", "OG", "₹149"],
-            ["MONEY GUN", "money-m.png", "RARE", "₹179"],
-            ["SELFIE", "SELFIE-CL.png", "EPIC", "₹149"],
-            ["PUSHPA RAAJ", "pushpa-raaj.png", "RARE", "₹179"],
-            ["MUMMY DANCE", "MUMMY-D.png", "OG", "₹115"],
-            ["CHAIR EMOTE", "sitting-chair.png", "OG", "₹179"]
+            ["LOL EMOTE", "lol.jpg", "EMOTE", "₹249"],
+            ["DEVIL MOVE", "devil-move.jpg", "EMOTE", "₹249"],
+            ["ROSE EMOTE", "rose.jpg", "EMOTE", "₹149"],
+            ["PIRATE FLAG", "pirate-flag.jpg", "EMOTE", "₹149"],
+            ["I HEART YOU", "i-heart-you.jpg", "EMOTE", "₹110"],
+            ["FFWC EMOTE", "ffwc.jpg", "EMOTE", "₹199"],
+            ["CAR EMOTE", "car.jpg", "EMOTE", "₹199"],
+            ["PUSH-UP EMOTE", "push-up.jpg", "EMOTE", "₹199"],
+            ["HIGH FIVE", "high-five.jpg", "EMOTE", "₹149"],
+            ["MONEY GUN", "money-gun.jpg", "EMOTE", "₹179"],
+            ["SELFIE", "selfie.jpg", "EMOTE", "₹149"],
+            ["PUSHPA RAAJ", "pushpa-raaj.jpg", "EMOTE", "₹179"],
+            ["MUMMY DANCE", "mummy-dance.jpg", "EMOTE", "₹115"],
+            ["CHAIR EMOTE", "chair.jpg", "EMOTE", "₹179"]
         ]
     },
-
-
-    /* ENTRY EMOTES */
 
     entryEmotes: {
-        title: "Entry Emotes",
-        small: "ENTRY EMOTE COLLECTION",
-
+        title: "ENTRY EMOTES",
         items: [
-            ["LAMBOHGINI RIDER", "lamborghini-reder.png", "OG", "₹199"],
-            ["TORNADO", "tornado.png", "OG", "₹249"],
-            ["OVER-CHARGE", "over-charge.png", "RARE", "₹199"],
-            ["DRAGON RIDE", "dragon-ride.png", "EPIC", "₹149"],
-            ["HORSE RIDE", "horse-ride.png", "OG", "₹179"],
-            ["WOLF ZAP", "wolf-zap.png", "RARE", "₹189"],
-            ["CARPET", "carpet-entry.png", "EPIC", "₹199"],
-            ["ENTRY EMOTE", "entry-bike.png", "OG", "₹149"]
+            ["LAMBOHGINI RIDER", "lamborghini.jpg", "ENTRY EMOTE", "₹199"],
+            ["TORNADO", "tornado.jpg", "ENTRY EMOTE", "₹249"],
+            ["OVER-CHARGE", "over-charge.jpg", "ENTRY EMOTE", "₹199"],
+            ["DRAGON RIDE", "dragon-ride.jpg", "ENTRY EMOTE", "₹149"],
+            ["HORSE RIDE", "horse-ride.jpg", "ENTRY EMOTE", "₹179"],
+            ["WOLF ZAP", "wolf-zap.jpg", "ENTRY EMOTE", "₹189"],
+            ["CARPET", "carpet.jpg", "ENTRY EMOTE", "₹199"],
+            ["ENTRY EMOTE", "entry-emote.jpg", "ENTRY EMOTE", "₹149"]
         ]
     },
-
-
-    /* GLOO WALL */
 
     gloo: {
-        title: "Gloo Wall Skins",
-        small: "SPECIAL WALL COLLECTION",
-
+        title: "GLOO WALL COLLECTION",
         items: [
-            ["AZURE Dragon Gloo Wall", "azure-gloo.png", "LEGENDARY", "₹79"],
-            ["Cobra Gloo Wall", "cobra.png", "EPIC", "₹99"],
-            ["ROARING PROTECTOR", "roar-ing.png", "RARE", "₹99"],
-            ["Demon SLAYER", "demon-slayer.png", "EPIC", "₹149"],
-            ["MINI GLOO WALL", "mini-wall.png", "OG", "₹199"],
-            ["SPIRIT GLOO WALL", "black-wall.png", "RARE", "₹179"],
-            ["NUTTY QUIRK", "nutty-quirk.png", "EPIC", "₹149"],
-            ["DRAGON SHIELD", "dra-gon.png", "RARE", "₹179"]
+            ["AZURE Dragon Gloo Wall", "azure-dragon.jpg", "GLOO", "₹79"],
+            ["Cobra Gloo Wall", "cobra.jpg", "GLOO", "₹99"],
+            ["ROARING PROTECTOR", "roaring-protector.jpg", "GLOO", "₹99"],
+            ["Demon SLAYER", "demon-slayer.jpg", "GLOO", "₹149"],
+            ["MINI GLOO WALL", "mini-gloo.jpg", "GLOO", "₹199"],
+            ["SPIRIT GLOO WALL", "spirit-gloo.jpg", "GLOO", "₹179"],
+            ["NUTTY QUIRK", "nutty-quirk.jpg", "GLOO", "₹149"],
+            ["DRAGON SHIELD", "dragon-shield.jpg", "GLOO", "₹179"]
         ]
     },
-
-
-    /* GRENADE */
 
     grenade: {
-        title: "Grenade Skins",
-        small: "GRENADE COLLECTION",
-
+        title: "GRENADE COLLECTION",
         items: [
-            ["Explosive Brick", "explo-sive.png", "RARE", "₹99"],
-            ["Pumpkin Bomb", "pump-kin.png", "EPIC", "₹99"],
-            ["Pineapple Fizz", "pine-apple.png", "RARE", "₹99"],
-            ["Egg Grenade", "e-gg.png", "EPIC", "₹99"]
+            ["Explosive Brick", "explosive-brick.jpg", "GRENADE", "₹99"],
+            ["Pumpkin Bomb", "pumpkin-bomb.jpg", "GRENADE", "₹99"],
+            ["Pineapple Fizz", "pineapple-fizz.jpg", "GRENADE", "₹99"],
+            ["Egg Grenade", "egg-grenade.jpg", "GRENADE", "₹99"]
         ]
     },
 
-
-    /* DIAMONDS */
-
     diamonds: {
-        title: "Diamond Packs",
-        small: "DIAMOND COLLECTION",
-
+        title: "DIAMONDS",
         items: [
-            ["1,000 Diamonds", "5-diamond.png", "EPIC", "₹60"],
-            ["10,000 Diamonds", "5-diamond.png", "EPIC", "₹149"],
-            ["20,000 Diamonds", "5-diamond.png", "EPIC", "₹400"],
-            ["50,000 Diamonds", "5-diamond.png", "EPIC", "₹500"]
+            ["1,000 Diamonds", "1000-diamonds.jpg", "DIAMONDS", "₹60"],
+            ["10,000 Diamonds", "10000-diamonds.jpg", "DIAMONDS", "₹149"],
+            ["20,000 Diamonds", "20000-diamonds.jpg", "DIAMONDS", "₹400"],
+            ["50,000 Diamonds", "50000-diamonds.jpg", "DIAMONDS", "₹500"]
         ]
     }
-
 };
 
 
-/* =========================
-   GLOBAL VARIABLES
-========================= */
+// ============================================================
+// GLOBAL VARIABLES
+// ============================================================
 
 let selectedItem = "";
 let selectedPrice = "";
-let countdownInterval = null;
+let selectedCategory = "";
+
 let buyerEmail = "";
 let buyerNickname = "";
 
+let localOrderId = null;
+let razorpayOrderId = null;
 
-/* =========================
-   OPEN CATEGORY
-========================= */
+let countdownInterval = null;
+let timeLeft = 120;
+
+
+// ============================================================
+// BASIC HELPERS
+// ============================================================
+
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+
+function showElement(id) {
+    const element = getElement(id);
+
+    if (element) {
+        element.classList.remove("hidden");
+    }
+}
+
+
+function hideElement(id) {
+    const element = getElement(id);
+
+    if (element) {
+        element.classList.add("hidden");
+    }
+}
+
+
+// ============================================================
+// CATEGORY OPEN
+// ============================================================
 
 function openCategory(category) {
 
-    const data = collections[category];
+    const collection = collections[category];
 
-    if (!data) return;
+    if (!collection) {
+        console.error("Category not found:", category);
+        return;
+    }
 
-    document
-        .querySelector(".hero")
-        .classList.add("hidden");
+    selectedCategory = category;
 
-    document
-        .querySelector(".collections")
-        .classList.add("hidden");
+    const collectionView = getElement("collectionView");
+    const collectionTitle = getElement("collectionTitle");
+    const itemsGrid = getElement("itemsGrid");
 
-    document
-        .getElementById("collectionView")
-        .classList.remove("hidden");
+    if (!itemsGrid) {
+        console.error("itemsGrid not found");
+        return;
+    }
 
-    document
-        .getElementById("collectionSmall")
-        .textContent = data.small;
+    if (collectionTitle) {
+        collectionTitle.textContent = collection.title;
+    }
 
-    document
-        .getElementById("collectionTitle")
-        .textContent = data.title;
+    itemsGrid.innerHTML = "";
 
-    const grid =
-        document.getElementById("itemsGrid");
+    collection.items.forEach(item => {
 
-    grid.innerHTML = "";
+        const itemName = item[0];
+        const image = item[1];
+        const type = item[2];
+        const price = item[3];
 
-    data.items.forEach((item, index) => {
-
-        const card =
-            document.createElement("div");
+        const card = document.createElement("div");
 
         card.className = "item-card";
 
-        card.style.animationDelay =
-            `${index * 50}ms`;
-
         card.innerHTML = `
-
             <div class="item-image">
-
                 <img
-                    src="${item[1]}"
-                    alt="${item[0]}"
-                    loading="lazy"
+                    src="${image}"
+                    alt="${itemName}"
+                    onerror="this.style.display='none'"
                 >
-
             </div>
 
             <div class="item-info">
-
-                <h3>
-                    ${item[0]}
-                </h3>
-
-                <span class="rarity">
-                    ${item[2]}
-                </span>
-
-                <div class="item-price">
-                    ${item[3]}
-                </div>
+                <div class="item-name">${itemName}</div>
+                <div class="item-type">${type}</div>
+                <div class="item-price">${price}</div>
 
                 <button
                     class="buy-btn"
-                    onclick="openBuyForm(
-                        '${item[0].replace(/'/g, "\\'")}',
-                        '${item[3]}'
-                    )"
+                    onclick='openBuyForm(${JSON.stringify(itemName)}, ${JSON.stringify(price)}, ${JSON.stringify(category)})'
                 >
                     BUY NOW
                 </button>
-
             </div>
-
         `;
 
-        grid.appendChild(card);
-
+        itemsGrid.appendChild(card);
     });
+
+    if (collectionView) {
+        collectionView.classList.remove("hidden");
+    }
 
     window.scrollTo({
         top: 0,
@@ -309,238 +280,564 @@ function openCategory(category) {
 }
 
 
-/* =========================
-   OPEN BUY FORM
-========================= */
+// ============================================================
+// BUY FORM
+// ============================================================
 
-function openBuyForm(item, price) {
+function openBuyForm(item, price, category) {
 
     selectedItem = item;
     selectedPrice = price;
+    selectedCategory = category;
 
-    document
-        .getElementById("buyItemName")
-        .textContent = item;
+    const itemName = getElement("buyItemName");
+    const itemPrice = getElement("buyItemPrice");
 
-    document
-        .getElementById("buyItemPrice")
-        .textContent = price;
+    if (itemName) {
+        itemName.textContent = item;
+    }
 
-    document
-        .getElementById("buyModal")
-        .classList
-        .remove("hidden");
+    if (itemPrice) {
+        itemPrice.textContent = price;
+    }
 
-    setTimeout(() => {
+    const emailInput = getElement("buyerEmail");
+    const nicknameInput = getElement("buyerNickname");
 
-        document
-            .getElementById("buyerEmail")
-            .focus();
+    if (emailInput) {
+        emailInput.value = "";
+    }
 
-    }, 100);
+    if (nicknameInput) {
+        nicknameInput.value = "";
+    }
+
+    showElement("buyModal");
 }
 
-
-/* =========================
-   CLOSE BUY FORM
-========================= */
 
 function closeBuyForm() {
-
-    document
-        .getElementById("buyModal")
-        .classList
-        .add("hidden");
+    hideElement("buyModal");
 }
 
 
-/* =========================
-   CONTINUE / CREATE ORDER
-========================= */
+// ============================================================
+// ORDER FORM
+// ============================================================
 
-document
-    .getElementById("buyForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
+const buyForm = getElement("buyForm");
 
-            event.preventDefault();
+if (buyForm) {
 
-            const email =
-                document
-                    .getElementById("buyerEmail")
-                    .value
-                    .trim();
+    buyForm.addEventListener("submit", async function (event) {
 
-            const nickname =
-                document
-                    .getElementById("buyerNickname")
-                    .value
-                    .trim();
+        event.preventDefault();
 
-            if (!email || !nickname) {
+        const emailInput = getElement("buyerEmail");
+        const nicknameInput = getElement("buyerNickname");
 
-                alert(
-                    "Email aur nickname dono enter karo."
+        if (!emailInput || !nicknameInput) {
+            alert("Buyer form fields not found.");
+            return;
+        }
+
+        buyerEmail = emailInput.value.trim();
+        buyerNickname = nicknameInput.value.trim();
+
+        if (!buyerEmail) {
+            alert("Please enter your email.");
+            return;
+        }
+
+        if (!buyerNickname) {
+            alert("Please enter your nickname / UID.");
+            return;
+        }
+
+        if (!selectedItem) {
+            alert("Please select a product.");
+            return;
+        }
+
+        if (!selectedCategory) {
+            alert("Product category missing.");
+            return;
+        }
+
+        const submitButton =
+            buyForm.querySelector('button[type="submit"]');
+
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "CREATING ORDER...";
+        }
+
+        try {
+
+            // IMPORTANT:
+            // Price is intentionally NOT sent from frontend.
+            // Server will calculate the real price.
+
+            const response = await fetch("/api/orders", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: buyerEmail,
+                    nickname: buyerNickname,
+                    selectedItem: selectedItem,
+                    category: selectedCategory
+                })
+            });
+
+
+            const result = await response.json();
+
+
+            if (!response.ok || !result.success) {
+
+                throw new Error(
+                    result.message || "Unable to create order."
                 );
-
-                return;
             }
 
-            buyerEmail = email;
-            buyerNickname = nickname;
 
-            try {
+            // Local database order ID
+            localOrderId = result.orderId;
 
-                const response =
-                    await fetch(
-                        "/api/orders",
-                        {
-                            method: "POST",
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
+            // Razorpay order ID
+            razorpayOrderId = result.razorpayOrderId;
 
-                            body: JSON.stringify({
-                                email:
-                                    buyerEmail,
 
-                                nickname:
-                                    buyerNickname,
+            // IMPORTANT:
+            // This price comes from SERVER.
+            selectedPrice = result.price;
 
-                                selectedItem:
-                                    selectedItem
-                            })
-                        }
-                    );
 
-                const result =
-                    await response.json();
+            // Update existing modal fields if present
+            const submitItemName = getElement("submitItemName");
+            const submitItemPrice = getElement("submitItemPrice");
 
-                if (
-                    !response.ok ||
-                    !result.success
-                ) {
+            if (submitItemName) {
+                submitItemName.textContent = result.selectedItem || selectedItem;
+            }
 
-                    alert(
-                        "Order save nahi hua:\n" +
-                        (
-                            result.message ||
-                            "Unknown error"
-                        )
-                    );
+            if (submitItemPrice) {
+                submitItemPrice.textContent = result.price;
+            }
+
+
+            closeBuyForm();
+
+
+            // Open real Razorpay payment
+            await openRazorpayPayment();
+
+        }
+
+        catch (error) {
+
+            console.error("Order error:", error);
+
+            alert(
+                error.message ||
+                "Something went wrong while creating the order."
+            );
+        }
+
+        finally {
+
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = "CONTINUE";
+            }
+        }
+
+    });
+}
+
+
+// ============================================================
+// RAZORPAY CHECKOUT LOADER
+// ============================================================
+
+function loadRazorpayCheckout() {
+
+    return new Promise((resolve, reject) => {
+
+        // Already loaded
+        if (window.Razorpay) {
+            resolve();
+            return;
+        }
+
+
+        const existingScript =
+            document.querySelector(
+                'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
+            );
+
+
+        if (existingScript) {
+
+            existingScript.addEventListener(
+                "load",
+                () => resolve()
+            );
+
+            existingScript.addEventListener(
+                "error",
+                () => reject(
+                    new Error("Razorpay Checkout failed to load.")
+                )
+            );
+
+            return;
+        }
+
+
+        const script = document.createElement("script");
+
+        script.src =
+            "https://checkout.razorpay.com/v1/checkout.js";
+
+        script.onload = function () {
+            resolve();
+        };
+
+        script.onerror = function () {
+            reject(
+                new Error("Unable to load Razorpay Checkout.")
+            );
+        };
+
+        document.head.appendChild(script);
+
+    });
+}
+
+
+// ============================================================
+// OPEN RAZORPAY PAYMENT
+// ============================================================
+
+async function openRazorpayPayment() {
+
+    if (!localOrderId) {
+        alert("Order ID missing.");
+        return;
+    }
+
+    if (!razorpayOrderId) {
+        alert("Razorpay order ID missing.");
+        return;
+    }
+
+
+    try {
+
+        await loadRazorpayCheckout();
+
+
+        // Ask server for PUBLIC Razorpay Key ID.
+        // Secret key must NEVER be placed in this JS file.
+
+        const keyResponse =
+            await fetch("/api/payment/key");
+
+
+        const keyResult =
+            await keyResponse.json();
+
+
+        if (!keyResponse.ok || !keyResult.success) {
+
+            throw new Error(
+                keyResult.message ||
+                "Unable to load payment configuration."
+            );
+        }
+
+
+        const razorpayKey =
+            keyResult.keyId;
+
+
+        if (!razorpayKey) {
+            throw new Error("Razorpay Key ID missing.");
+        }
+
+
+        const options = {
+
+            key: razorpayKey,
+
+            order_id: razorpayOrderId,
+
+            name: "FF Vault",
+
+            description:
+                selectedItem || "FF Vault Purchase",
+
+
+            // This is only display information.
+            // Actual amount is locked in Razorpay Order
+            // created by the server.
+
+            prefill: {
+                email: buyerEmail
+            },
+
+
+            notes: {
+                local_order_id: String(localOrderId),
+                product: selectedItem,
+                category: selectedCategory
+            },
+
+
+            theme: {
+                color: "#00eaff"
+            },
+
+
+            handler: async function (paymentResponse) {
+
+                await verifyRazorpayPayment(
+                    paymentResponse
+                );
+            },
+
+
+            modal: {
+
+                ondismiss: function () {
 
                     console.log(
-                        "Server response:",
-                        result
+                        "Razorpay checkout closed by user."
                     );
-
-                    return;
                 }
+            }
+        };
 
-                orderId =
-                    result.orderId;
 
-                /*
-                    SERVER-CONFIRMED PRICE
-                    Frontend ki price ko trust nahi kar rahe.
-                */
-                selectedPrice =
-                    result.price;
+        const razorpay =
+            new Razorpay(options);
 
-                closeBuyForm();
 
-                document
-                    .getElementById(
-                        "submitItemName"
-                    )
-                    .textContent =
-                    selectedItem;
-
-                document
-                    .getElementById(
-                        "submitItemPrice"
-                    )
-                    .textContent =
-                    selectedPrice;
-
-                document
-                    .getElementById(
-                        "submitModal"
-                    )
-                    .classList
-                    .remove("hidden");
-
-                startTimer();
-
-            } catch (error) {
+        razorpay.on(
+            "payment.failed",
+            function (response) {
 
                 console.error(
-                    "Order error:",
-                    error
+                    "Payment failed:",
+                    response
                 );
 
                 alert(
-                    "Server connection error."
+                    "Payment failed. Please try again."
                 );
             }
-
-        }
-    );
+        );
 
 
-/* =========================
-   2 MINUTE TIMER
-========================= */
+        razorpay.open();
 
-function startTimer() {
+    }
 
-    clearInterval(countdownInterval);
+    catch (error) {
 
-    let timeLeft = 120;
+        console.error(
+            "Razorpay error:",
+            error
+        );
 
-    updateTimer(timeLeft);
-
-    countdownInterval = setInterval(() => {
-
-        timeLeft--;
-
-        updateTimer(timeLeft);
-
-        if (timeLeft <= 0) {
-
-            clearInterval(countdownInterval);
-
-            updateTimer(0);
-
-            const submitModal =
-                document.getElementById(
-                    "submitModal"
-                );
-
-            if (submitModal) {
-                submitModal.classList.add("hidden");
-            }
-
-            goHome();
-
-            setTimeout(() => {
-                showOfferPopup();
-            }, 300);
-
-        }
-
-    }, 1000);
+        alert(
+            error.message ||
+            "Unable to open payment."
+        );
+    }
 }
 
 
-/* =========================
-   UPDATE TIMER
-========================= */
+// ============================================================
+// VERIFY RAZORPAY PAYMENT
+// ============================================================
+
+async function verifyRazorpayPayment(paymentResponse) {
+
+    if (!paymentResponse) {
+        alert("Payment response missing.");
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            "/api/payment/verify",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    localOrderId: localOrderId,
+
+                    razorpay_order_id:
+                        paymentResponse.razorpay_order_id,
+
+                    razorpay_payment_id:
+                        paymentResponse.razorpay_payment_id,
+
+                    razorpay_signature:
+                        paymentResponse.razorpay_signature
+                })
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok || !result.success) {
+
+            throw new Error(
+                result.message ||
+                "Payment verification failed."
+            );
+        }
+
+
+        // ONLY after server verification
+        // do we show payment success.
+
+        showPaymentSuccess(result);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Payment verification error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "Payment could not be verified."
+        );
+    }
+}
+
+
+// ============================================================
+// PAYMENT SUCCESS
+// ============================================================
+
+function showPaymentSuccess(result) {
+
+    hideElement("submitModal");
+
+    const successItem =
+        getElement("successItemName");
+
+    const successPrice =
+        getElement("successItemPrice");
+
+    if (successItem) {
+        successItem.textContent =
+            result.selectedItem ||
+            selectedItem;
+    }
+
+    if (successPrice) {
+        successPrice.textContent =
+            result.price ||
+            selectedPrice;
+    }
+
+
+    showElement("successModal");
+}
+
+
+// ============================================================
+// FINAL SUBMIT
+// ============================================================
+
+async function finalSubmit() {
+
+    // This function is kept for any existing HTML
+    // button that calls finalSubmit().
+
+    await openRazorpayPayment();
+}
+
+
+// ============================================================
+// SUBMIT MODAL
+// ============================================================
+
+function closeSubmitModal() {
+
+    hideElement("submitModal");
+
+    clearInterval(countdownInterval);
+    countdownInterval = null;
+}
+
+
+function openSubmitModal() {
+
+    const submitItemName =
+        getElement("submitItemName");
+
+    const submitItemPrice =
+        getElement("submitItemPrice");
+
+
+    if (submitItemName) {
+        submitItemName.textContent =
+            selectedItem;
+    }
+
+
+    if (submitItemPrice) {
+        submitItemPrice.textContent =
+            selectedPrice;
+    }
+
+
+    showElement("submitModal");
+
+    startTimer();
+}
+
+
+// ============================================================
+// TIMER
+// ============================================================
 
 function updateTimer(seconds) {
+
+    const timer =
+        getElement("timer");
+
+    if (!timer) {
+        return;
+    }
+
 
     const minutes =
         Math.floor(seconds / 60);
@@ -548,326 +845,462 @@ function updateTimer(seconds) {
     const remainingSeconds =
         seconds % 60;
 
-    const timer =
-        document.getElementById("timer");
-
-    if (!timer) return;
 
     timer.textContent =
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(remainingSeconds).padStart(2, "0");
+        `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
 
-/* =========================
-   FINAL SUBMIT
-========================= */
-
-async function finalSubmit() {
-
-    const btn =
-        document.getElementById(
-            "finalSubmitBtn"
-        );
-
-    if (!btn) {
-        return;
-    }
-
-    if (btn.disabled) {
-        return;
-    }
+function startTimer() {
 
     clearInterval(countdownInterval);
 
-    if (orderId) {
+    timeLeft = 120;
 
-        try {
+    updateTimer(timeLeft);
 
-            await fetch(
-                `/api/orders/${orderId}/status`,
-                {
-                    method: "PATCH",
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+    countdownInterval =
+        setInterval(function () {
 
-                    body: JSON.stringify({
-                        status: "completed"
-                    })
-                }
-            );
+            timeLeft--;
 
-        } catch (error) {
+            updateTimer(timeLeft);
 
-            console.log(
-                "Status update error:",
-                error
-            );
 
-        }
+            if (timeLeft <= 0) {
 
-    }
+                clearInterval(countdownInterval);
 
-    const submitModal =
-        document.getElementById(
-            "submitModal"
-        );
+                countdownInterval = null;
 
-    if (submitModal) {
-        submitModal.classList.add("hidden");
-    }
+                updateTimer(0);
 
-    const successModal =
-        document.getElementById(
-            "successModal"
-        );
+                hideElement("submitModal");
 
-    if (successModal) {
-        successModal.classList.remove("hidden");
-    }
+                goHome();
+
+                setTimeout(function () {
+
+                    showOfferPopup();
+
+                }, 300);
+            }
+
+        }, 1000);
 }
 
 
-/* =========================
-   CLOSE SUBMIT MODAL
-========================= */
-
-function closeSubmitModal() {
-
-    const submitModal =
-        document.getElementById(
-            "submitModal"
-        );
-
-    if (submitModal) {
-        submitModal.classList.add("hidden");
-    }
-
-    clearInterval(countdownInterval);
-}
-
-
-/* =========================
-   CLOSE SUCCESS
-========================= */
+// ============================================================
+// SUCCESS MODAL
+// ============================================================
 
 function closeSuccess() {
 
-    const successModal =
-        document.getElementById(
-            "successModal"
-        );
-
-    if (successModal) {
-        successModal.classList.add("hidden");
-    }
+    hideElement("successModal");
 
     goHome();
 
-    setTimeout(() => {
+    setTimeout(function () {
+
         showOfferPopup();
+
     }, 300);
 }
 
 
-/* =========================
-   SPECIAL OFFER POPUP
-========================= */
+// ============================================================
+// OFFER POPUP
+// ============================================================
 
 function showOfferPopup() {
 
     const offerModal =
-        document.getElementById(
-            "offerModal"
-        );
+        getElement("offerModal");
 
     if (!offerModal) {
         return;
     }
 
-    offerModal
-        .classList
-        .remove("hidden");
+    offerModal.classList.remove("hidden");
 }
 
-
-/* =========================
-   CLOSE OFFER POPUP
-========================= */
 
 function closeOfferPopup() {
 
-    const offerModal =
-        document.getElementById(
-            "offerModal"
-        );
-
-    if (!offerModal) {
-        return;
-    }
-
-    offerModal
-        .classList
-        .add("hidden");
+    hideElement("offerModal");
 }
 
 
-/* =========================
-   HOME
-========================= */
+// ============================================================
+// HOME
+// ============================================================
 
 function goHome() {
 
-    document
-        .querySelector(".hero")
-        .classList
-        .remove("hidden");
+    const collectionView =
+        getElement("collectionView");
 
-    document
-        .querySelector(".collections")
-        .classList
-        .remove("hidden");
+    if (collectionView) {
+        collectionView.classList.add("hidden");
+    }
 
-    document
-        .getElementById("collectionView")
-        .classList
-        .add("hidden");
 
-    document
-        .getElementById("searchInput")
-        .value = "";
+    const homeSection =
+        getElement("home");
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    if (homeSection) {
+
+        homeSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    } else {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+// ============================================================
+// SEARCH
+// ============================================================
 
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "input",
-        function() {
+function searchProducts(query) {
 
-            const query =
-                this.value
+    const searchText =
+        query.trim().toLowerCase();
+
+
+    if (!searchText) {
+        return;
+    }
+
+
+    const results = [];
+
+
+    Object.keys(collections).forEach(category => {
+
+        const collection =
+            collections[category];
+
+
+        collection.items.forEach(item => {
+
+            const itemName =
+                item[0];
+
+
+            if (
+                itemName
                     .toLowerCase()
-                    .trim();
+                    .includes(searchText)
+            ) {
 
-            document
-                .querySelectorAll(
-                    ".item-card"
-                )
-                .forEach(card => {
-
-                    const text =
-                        card.textContent
-                            .toLowerCase();
-
-                    card.style.display =
-                        text.includes(query)
-                            ? ""
-                            : "none";
-
+                results.push({
+                    category: category,
+                    item: item
                 });
-
-        }
-    );
-
-
-/* =========================
-   BUY MODAL BACKGROUND CLICK
-========================= */
-
-document
-    .getElementById("buyModal")
-    .addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === this
-            ) {
-                closeBuyForm();
             }
 
-        }
-    );
+        });
+
+    });
 
 
-/* =========================
-   SUBMIT MODAL BACKGROUND CLICK
-========================= */
+    const collectionView =
+        getElement("collectionView");
 
-document
-    .getElementById("submitModal")
-    .addEventListener(
-        "click",
-        function(event) {
+    const collectionTitle =
+        getElement("collectionTitle");
 
-            if (
-                event.target === this
-            ) {
-                closeSubmitModal();
-            }
-
-        }
-    );
+    const itemsGrid =
+        getElement("itemsGrid");
 
 
-/* =========================
-   OFFER MODAL BACKGROUND CLICK
-========================= */
+    if (!itemsGrid) {
+        return;
+    }
 
-const offerModal =
-    document.getElementById(
-        "offerModal"
-    );
 
-if (offerModal) {
+    if (collectionTitle) {
+        collectionTitle.textContent =
+            `SEARCH RESULTS (${results.length})`;
+    }
 
-    offerModal.addEventListener(
-        "click",
-        function(event) {
 
-            if (
-                event.target === this
-            ) {
-                closeOfferPopup();
-            }
+    itemsGrid.innerHTML = "";
 
-        }
-    );
 
+    if (results.length === 0) {
+
+        itemsGrid.innerHTML = `
+            <div class="no-results">
+                No products found.
+            </div>
+        `;
+
+    } else {
+
+        results.forEach(result => {
+
+            const item =
+                result.item;
+
+            const category =
+                result.category;
+
+
+            const itemName =
+                item[0];
+
+            const image =
+                item[1];
+
+            const type =
+                item[2];
+
+            const price =
+                item[3];
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "item-card";
+
+
+            card.innerHTML = `
+
+                <div class="item-image">
+
+                    <img
+                        src="${image}"
+                        alt="${itemName}"
+                        onerror="this.style.display='none'"
+                    >
+
+                </div>
+
+
+                <div class="item-info">
+
+                    <div class="item-name">
+                        ${itemName}
+                    </div>
+
+                    <div class="item-type">
+                        ${type}
+                    </div>
+
+                    <div class="item-price">
+                        ${price}
+                    </div>
+
+
+                    <button
+                        class="buy-btn"
+                        onclick='openBuyForm(
+                            ${JSON.stringify(itemName)},
+                            ${JSON.stringify(price)},
+                            ${JSON.stringify(category)}
+                        )'
+                    >
+                        BUY NOW
+                    </button>
+
+                </div>
+            `;
+
+
+            itemsGrid.appendChild(card);
+
+        });
+
+    }
+
+
+    if (collectionView) {
+        collectionView.classList.remove("hidden");
+    }
 }
 
 
-/* =========================
-   ESC KEY
-========================= */
+// ============================================================
+// SEARCH INPUT EVENT
+// ============================================================
+
+const searchInput =
+    getElement("searchInput");
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            searchProducts(
+                searchInput.value
+            );
+
+        }
+    );
+}
+
+
+// ============================================================
+// BACKGROUND CLICK
+// ============================================================
 
 document.addEventListener(
-    "keydown",
-    function(event) {
+    "click",
+    function (event) {
+
+        const buyModal =
+            getElement("buyModal");
+
+        const submitModal =
+            getElement("submitModal");
+
+        const successModal =
+            getElement("successModal");
+
+        const offerModal =
+            getElement("offerModal");
+
 
         if (
-            event.key === "Escape"
+            buyModal &&
+            event.target === buyModal
         ) {
 
             closeBuyForm();
+        }
+
+
+        if (
+            submitModal &&
+            event.target === submitModal
+        ) {
+
             closeSubmitModal();
+        }
+
+
+        if (
+            successModal &&
+            event.target === successModal
+        ) {
+
+            closeSuccess();
+        }
+
+
+        if (
+            offerModal &&
+            event.target === offerModal
+        ) {
+
+            closeOfferPopup();
+        }
+
+    }
+);
+
+
+// ============================================================
+// ESC KEY
+// ============================================================
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key !== "Escape") {
+            return;
+        }
+
+
+        const buyModal =
+            getElement("buyModal");
+
+        const submitModal =
+            getElement("submitModal");
+
+        const successModal =
+            getElement("successModal");
+
+        const offerModal =
+            getElement("offerModal");
+
+
+        if (
+            buyModal &&
+            !buyModal.classList.contains("hidden")
+        ) {
+
+            closeBuyForm();
+
+        }
+
+
+        if (
+            submitModal &&
+            !submitModal.classList.contains("hidden")
+        ) {
+
+            closeSubmitModal();
+
+        }
+
+
+        if (
+            successModal &&
+            !successModal.classList.contains("hidden")
+        ) {
+
+            closeSuccess();
+
+        }
+
+
+        if (
+            offerModal &&
+            !offerModal.classList.contains("hidden")
+        ) {
+
             closeOfferPopup();
 
         }
 
     }
+);
+
+
+// ============================================================
+// INITIAL STATE
+// ============================================================
+
+// IMPORTANT:
+// Yahan koi showOfferPopup() call nahi hai.
+// Isliye refresh/page load par offer popup automatically
+// nahi khulega.
+
+hideElement("submitModal");
+
+
+// ============================================================
+// DEBUG
+// ============================================================
+
+console.log(
+    "FF Vault script loaded successfully."
 );
