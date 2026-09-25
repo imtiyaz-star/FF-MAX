@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FF Vault - Payment</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080808;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .payment-box {
+            width: 100%;
+            max-width: 430px;
+
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 20px;
+
+            padding: 28px;
+            text-align: center;
+
+            box-shadow: 0 0 40px rgba(255,255,255,.08);
+        }
+
+        .label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        #itemName {
+            color: #ccc;
+            margin-bottom: 18px;
+        }
+
+        .amount {
+            font-size: 38px;
+            font-weight: 700;
+            margin: 15px 0 25px;
+        }
+
+        .timer {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+        .qr-box {
+            width: 230px;
+            height: 230px;
+
+            background: white;
+            border-radius: 12px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .note {
+            color: #999;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .paid-btn {
+            width: 100%;
+            padding: 14px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: white;
+            color: black;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .back-btn {
+            margin-top: 12px;
+
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #333;
+            border-radius: 10px;
+
+            background: transparent;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .status {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="payment-box">
+
+        <div class="label">
+            FF RARE VAULT
+        </div>
+
+        <h1>Complete Payment</h1>
+
+        <div id="timer" class="timer">
+    02:00
+</div>
+
+        <div id="itemName">
+            Loading...
+        </div>
+
+        <div id="amount" class="amount">
+            ₹0
+        </div>
+
+        <div class="qr-box">
+            <img id="paymentQR" src="" alt="Payment QR">
+        </div>
+
+        <div class="note">
+            Scan the QR code and pay the exact amount shown above.
+        </div>
+
+        <button id="paidButton" class="paid-btn">
+    I HAVE PAID
+</button>
+
+        <button class="back-btn" onclick="history.back()">
+            ← BACK
+        </button>
+
+       <div id="paymentStatus" class="status"></div>
+
+    </div>
+
+    <script src="payment.js"></script>
+
+</body>
+</html>
