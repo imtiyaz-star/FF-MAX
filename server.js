@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const Database = require("better-sqlite3");
 const session = require("express-session");
+const QRCode = require("qrcode");
 
 const app = express();
 
@@ -250,6 +251,86 @@ function requireAdmin(req, res, next) {
     });
 
 }
+
+/* =========================
+   PAYMENT PAGE ORDER + DYNAMIC QR
+========================= */
+
+app.get("/api/payment/order/:id", async (req, res) => {
+
+    try {
+
+        const id = Number(req.params.id);
+
+        if (!Number.isInteger(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid order ID"
+            });
+        }
+
+        const order = db.prepare(`
+            SELECT
+                id,
+                selected_item AS selectedItem,
+                price
+            FROM orders
+            WHERE id = ?
+        `).get(id);
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        /* ₹199 -> 199.00 */
+        const amount = Number(
+            String(order.price).replace(/[₹,]/g, "").trim()
+        );
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+            return res.status(500).json({
+                success: false,
+                message: "Invalid payment amount"
+            });
+        }
+
+        /* UPI payment URL */
+        const upiUrl =
+            `upi://pay?pa=mdmtiyaz562@okhdfcbank` +
+            `&pn=FF%20Vault` +
+            `&am=${amount.toFixed(2)}` +
+            `&cu=INR`;
+
+        /* Generate QR */
+        const qr = await QRCode.toDataURL(upiUrl, {
+            width: 500,
+            margin: 2
+        });
+
+        return res.json({
+            success: true,
+            orderId: order.id,
+            selectedItem: order.selectedItem,
+            price: order.price,
+            amount: amount.toFixed(2),
+            qr: qr
+        });
+
+    } catch (error) {
+
+        console.error("Payment QR error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+
+    }
+
+});
 
 
 /* =========================
