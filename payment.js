@@ -16,6 +16,59 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    /* =========================
+   2 MINUTE PAYMENT TIMER
+========================= */
+
+const timerEl = document.getElementById("timer");
+
+const timerKey = `paymentTimer_${orderId}`;
+
+let startTime = localStorage.getItem(timerKey);
+
+if (!startTime) {
+    startTime = Date.now();
+    localStorage.setItem(timerKey, startTime);
+} else {
+    startTime = Number(startTime);
+}
+
+const TIMER_DURATION = 120000;
+
+function updatePaymentTimer() {
+
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, TIMER_DURATION - elapsed);
+    const totalSeconds = Math.ceil(remaining / 1000);
+
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    if (timerEl) {
+        timerEl.textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    if (remaining <= 0) {
+
+        clearInterval(paymentTimer);
+
+        if (paidButton) {
+            paidButton.disabled = true;
+        }
+
+        localStorage.removeItem(timerKey);
+
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 500);
+    }
+}
+
+updatePaymentTimer();
+
+const paymentTimer = setInterval(updatePaymentTimer, 250);
+    
     try {
 
         const response = await fetch(
@@ -80,66 +133,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
     }
-
-    /* =========================
-   2 MINUTE PAYMENT TIMER
-========================= */
-
-const timerEl = document.getElementById("timer");
-
-const timerKey = `paymentTimer_${orderId}`;
-
-let startTime = localStorage.getItem(timerKey);
-
-if (!startTime) {
-    startTime = Date.now();
-    localStorage.setItem(timerKey, startTime);
-} else {
-    startTime = Number(startTime);
-}
-
-const TIMER_DURATION = 120000; // 2 minutes
-
-function updatePaymentTimer() {
-
-    const elapsed = Date.now() - startTime;
-    const remaining = Math.max(0, TIMER_DURATION - elapsed);
-
-    const totalSeconds = Math.ceil(remaining / 1000);
-
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-
-    if (timerEl) {
-        timerEl.textContent =
-            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-    }
-
-    if (remaining <= 0) {
-
-        clearInterval(paymentTimer);
-
-        if (timerEl) {
-            timerEl.textContent = "00:00";
-        }
-
-        if (paidButton) {
-            paidButton.disabled = true;
-        }
-
-        // Timer finished — remove saved timer
-        localStorage.removeItem(timerKey);
-
-        setTimeout(() => {
-            window.location.href = "/";
-        }, 500);
-
-        return;
-    }
-}
-
-updatePaymentTimer();
-
-const paymentTimer = setInterval(updatePaymentTimer, 250);
 
 });
