@@ -263,7 +263,7 @@ function openCategory(category) {
             <div class="item-image">
 
                 <img
-    src="/images/${item[1]}"
+    src="/${item[1]}"
     alt="${item[0]}"
     loading="lazy"
 >
