@@ -85,21 +85,37 @@ document.addEventListener("DOMContentLoaded", async () => {
    2 MINUTE PAYMENT TIMER
 ========================= */
 
-let timeLeft = 120;
-
 const timerEl = document.getElementById("timer");
 
-const paymentTimer = setInterval(() => {
+const timerKey = `paymentTimer_${orderId}`;
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
+let startTime = localStorage.getItem(timerKey);
+
+if (!startTime) {
+    startTime = Date.now();
+    localStorage.setItem(timerKey, startTime);
+} else {
+    startTime = Number(startTime);
+}
+
+const TIMER_DURATION = 120000; // 2 minutes
+
+function updatePaymentTimer() {
+
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, TIMER_DURATION - elapsed);
+
+    const totalSeconds = Math.ceil(remaining / 1000);
+
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
 
     if (timerEl) {
         timerEl.textContent =
             `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     }
 
-    if (timeLeft <= 0) {
+    if (remaining <= 0) {
 
         clearInterval(paymentTimer);
 
@@ -107,24 +123,23 @@ const paymentTimer = setInterval(() => {
             timerEl.textContent = "00:00";
         }
 
-        /* Disable paid button */
-        const paidButton =
-            document.getElementById("paidButton");
-
         if (paidButton) {
             paidButton.disabled = true;
         }
 
-        /* Go back to HOME */
+        // Timer finished — remove saved timer
+        localStorage.removeItem(timerKey);
+
         setTimeout(() => {
             window.location.href = "/";
         }, 500);
 
         return;
     }
+}
 
-    timeLeft--;
+updatePaymentTimer();
 
-}, 1000);
+const paymentTimer = setInterval(updatePaymentTimer, 250);
 
 });
