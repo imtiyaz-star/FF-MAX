@@ -9,8 +9,8 @@ const collections = {
         small: "ULTRA RARE COLLECTION",
 
         items: [
-            ["Arctic Blue Bundle", "image/arctic-blue.jpg", "ULTRA RARE", "₹149"],
-            ["Zombie Samurai", "images/zombie-samurai.jpg", "RARE", "₹199"],
+            ["Arctic Blue Bundle", "arctic-blue.jpg", "ULTRA RARE", "₹149"],
+            ["Zombie Samurai", "zombie-samurai.jpg", "RARE", "₹199"],
             ["Knight Clown", "knight-clown.jpg", "ULTRA RARE", "₹149"],
             ["Angelic Bundle", "angelic.jpg", "HIGH DEMAND", "₹199"],
             ["Bunny Warrior", "bunny-warrior.jpg", "RARE", "₹199"],
