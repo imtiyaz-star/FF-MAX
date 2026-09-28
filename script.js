@@ -15,7 +15,7 @@ const collections = {
             ["Angelic Bundle", "angelic.jpg", "HIGH DEMAND", "₹199"],
             ["Bunny Warrior", "bunny-warrior.jpg", "RARE", "₹199"],
             ["Galaxy Dino", "galaxy-dino.jpg", "ULTRA RARE", "₹179"],
-            ["HipHop Bundle", "hiphop.jpg", "OG", "₹200"],
+            ["HipHop Bundle", "hiphop.jpg", "OG", "₹199"],
             ["Old Bundle", "old-b.png", "RARE", "₹149"],
             ["Sakura Bundle", "sakura.jpg", "HIGH DEMAND", "₹199"]
         ]
